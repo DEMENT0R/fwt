@@ -2,6 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// debug
+Route::get('/cars', [\App\Http\Controllers\CarController::class, 'index']);
+Route::get('/cars/{id}', [\App\Http\Controllers\CarController::class, 'show']);
