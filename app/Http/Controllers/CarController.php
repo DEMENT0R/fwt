@@ -13,6 +13,28 @@ class CarController extends Controller
      */
     public function index()
     {
+        $cars = \App\Models\Car::all();
+        return view('cars-list', [
+            'cars' => $cars,
+        ]);
+    }
+
+    public function models()
+    {
+        $models = \App\Models\Car::groupBy('Model')->pluck('Model');
+        return view('models', [
+            'models' => $models,
+        ]);
+    }
+
+    public function model($model)
+    {
+        $carOne = Car::where('Model', '=', $model)->inRandomOrder()->first();
+        $carTwo = Car::where('Model', '=', $model)->inRandomOrder()->first();
+        return view('model', [
+            'carOne' => $carOne,
+            'carTwo' => $carTwo,
+        ]);
     }
 
     /**
@@ -36,6 +58,11 @@ class CarController extends Controller
      */
     public function show(Car $car, $carId)
     {
+        $car = Car::find($carId)->toArray();
+
+        return view('car', [
+            'car' => $car,
+        ]);
     }
 
     /**
