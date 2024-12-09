@@ -14,5 +14,11 @@ class CarSeeder extends Seeder
      */
     public function run(): void
     {
+        $getCars = new GetCarsAction();
+        $cars = $getCars();
+
+        foreach ($cars as $car) {
+            Car::create($car);
+        }
     }
 }
